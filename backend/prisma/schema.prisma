@@ -1,0 +1,102 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum Role {
+  CUSTOMER
+  AGENT
+  ADMIN
+}
+
+enum TicketStatus {
+  OPEN
+  IN_PROGRESS
+  RESOLVED
+  CLOSED
+}
+
+enum SenderType {
+  CUSTOMER
+  AGENT
+  AI
+}
+
+enum Sentiment {
+  POSITIVE
+  NEUTRAL
+  FRUSTRATED
+  ANGRY
+}
+
+model User {
+  id        String   @id @default(uuid())
+  name      String
+  email     String   @unique
+  password  String
+  role      Role
+  isActive  Boolean  @default(true)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @default(now()) @updatedAt
+
+  conversations Conversation[] @relation("UserConversations")
+  messages      Message[]
+  agentStatus   AgentStatus?
+
+  assignedTickets Ticket[]
+}
+
+model Conversation {
+  id        String   @id @default(uuid())
+  createdAt DateTime @default(now())
+
+  participants User[]    @relation("UserConversations")
+  messages     Message[]
+  ticket       Ticket?
+}
+
+model Message {
+  id        String   @id @default(uuid())
+  content   String
+  senderType SenderType
+  createdAt DateTime @default(now())
+
+  conversationId String
+  conversation   Conversation @relation(fields: [conversationId], references: [id])
+
+  senderId String
+  sender   User   @relation(fields: [senderId], references: [id])
+}
+
+model Ticket {
+  id         String       @id @default(uuid())
+  status     TicketStatus @default(OPEN)
+  createdAt  DateTime     @default(now())
+  resolvedAt DateTime?
+
+  conversationId String       @unique
+  conversation   Conversation @relation(fields: [conversationId], references: [id])
+
+  assignedAgentId String?
+  assignedAgent   User?   @relation(fields: [assignedAgentId], references: [id])
+}
+
+model AgentStatus {
+  id          String  @id @default(uuid())
+  agentId     String  @unique
+  isOnline    Boolean @default(false)
+  activeChats Int     @default(0)
+
+  agent User @relation(fields: [agentId], references: [id])
+}
+
+model AuditLog {
+  id        String   @id @default(uuid())
+  action    String
+  metadata  Json?
+  createdAt DateTime @default(now())
+}

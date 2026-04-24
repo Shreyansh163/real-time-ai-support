@@ -2,8 +2,10 @@
 
 A full-stack customer support platform where customers chat with an AI assistant and get automatically escalated to a human agent when one is available. Built to explore real-time systems, structured LLM outputs, and multi-role workflows end-to-end.
 
-> **Live demo:** _add URL after deploying_
+> **Live demo:** https://real-time-ai-support.vercel.app
 > **Demo video / GIF:** _add after recording_
+>
+> Sign in with one of the seeded demo accounts listed below (all use password `password`).
 
 ---
 
@@ -175,7 +177,7 @@ frontend/
 
 - [ ] Unit + e2e test coverage
 - [ ] CI (GitHub Actions)
-- [ ] Deployment (Vercel + Railway)
+- [x] Deployment (Vercel + Railway + Neon)
 - [ ] Structured logging + Sentry
 - [ ] File/image attachments
 - [ ] Redis-backed rate limiter for multi-instance deploys

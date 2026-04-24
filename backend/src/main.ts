@@ -7,15 +7,21 @@ async function bootstrap() {
 
   const app = await NestFactory.create(AppModule);
 
+  const allowed = (process.env.CORS_ORIGINS ?? "http://localhost:3001")
+    .split(",")
+    .map(s => s.trim())
+    .filter(Boolean);
+
   app.enableCors({
-    origin: "http://localhost:3001",
+    origin: allowed,
     credentials: true,
   });
 
-  const port = 3000;
-  await app.listen(port);
+  const port = Number(process.env.PORT) || 3000;
+  await app.listen(port, "0.0.0.0");
 
-  console.log(`🚀 Server running on http://localhost:${port}`);
+  console.log(`🚀 Server running on port ${port}`);
+  console.log(`   CORS allowed origins: ${allowed.join(", ")}`);
 }
 
 bootstrap().catch(err => {

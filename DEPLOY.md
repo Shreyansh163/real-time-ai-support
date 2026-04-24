@@ -20,6 +20,9 @@ This project is structured as three deployable pieces: **Postgres**, **NestJS ba
    npx prisma migrate deploy
    npm run seed
    ```
+    - migrate deploy applies all your existing migrations to the Neon database (create tables).                                               
+    - seed inserts the admin/agents/customers/AI user.
+    
 3. Save the connection string (needed by backend).
 
 ---

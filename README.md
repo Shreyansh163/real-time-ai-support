@@ -128,11 +128,11 @@ All passwords are `password`.
 
 | Role     | Email                    |
 | -------- | ------------------------ |
-| Admin    | admin@demo.local         |
-| Agent 1  | agent1@demo.local        |
-| Agent 2  | agent2@demo.local        |
-| Customer | customer1@demo.local     |
-| Customer | customer2@demo.local     |
+| Admin    | admin@test.com         |
+| Agent 1  | agent1@test.com        |
+| Agent 2  | agent2@test.com        |
+| Customer | customer1@test.com     |
+| Customer | customer2@test.com     |
 
 ---
 

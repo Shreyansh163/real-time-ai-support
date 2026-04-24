@@ -22,7 +22,7 @@ This project is structured as three deployable pieces: **Postgres**, **NestJS ba
    ```
     - migrate deploy applies all your existing migrations to the Neon database (create tables).                                               
     - seed inserts the admin/agents/customers/AI user.
-    
+
 3. Save the connection string (needed by backend).
 
 ---
@@ -39,7 +39,7 @@ This project is structured as three deployable pieces: **Postgres**, **NestJS ba
    ```
 3. Set the build and start commands:
    - Build: `npm install && npx prisma generate && npm run build`
-   - Start: `npm run start:prod`
+   - Start: `npm run start`
 4. Make sure CORS in `backend/src/chat/chat.gateway.ts` (`origin: "*"`) stays permissive, or tighten it to your Vercel URL once you have it.
 5. Add a custom public domain or use the generated `*.up.railway.app` URL.
 
@@ -58,7 +58,7 @@ This project is structured as three deployable pieces: **Postgres**, **NestJS ba
 
 ## After deploying
 
-- Test the live site with the seeded accounts (`customer1@demo.local` / `password`, `agent1@demo.local`, `admin@demo.local`).
+- Test the live site with the seeded accounts (`customer1@test.com` / `password`, `agent1@test.com`, `admin@test.com`).
 - Record a short GIF of the core flow (customer message → AI reply → agent takeover → resolve) and link it in `README.md`.
 - Consider tightening the Socket.IO CORS to your Vercel origin only.
 

@@ -63,6 +63,7 @@ model Message {
   id        String   @id @default(uuid())
   content   String
   senderType SenderType
+  sentiment Sentiment?
   createdAt DateTime @default(now())
 
   conversationId String

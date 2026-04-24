@@ -8,10 +8,16 @@ import { Role } from "@prisma/client";
 export class ConversationsController {
   constructor(private readonly conversationsService: ConversationsService) {}
 
+  @Roles(Role.CUSTOMER)
+  @Get("mine")
+  listMine(@Req() req: any) {
+    return this.conversationsService.listForCustomer(req.user.userId);
+  }
+
   @UseGuards(JwtAuthGuard)
   @Get(":id")
-  async getConversation(@Param("id") id: string) {
-    return this.conversationsService.getConversationById(id);
+  async getConversation(@Param("id") id: string, @Req() req: any) {
+    return this.conversationsService.getConversationById(id, req.user);
   }
   @Roles(Role.CUSTOMER)
   @Post()

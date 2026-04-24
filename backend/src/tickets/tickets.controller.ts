@@ -1,4 +1,13 @@
-import { Controller, Patch, Get, Param, Req, UseGuards } from "@nestjs/common";
+import {
+  Controller,
+  Patch,
+  Post,
+  Get,
+  Param,
+  Req,
+  UseGuards,
+  Body,
+} from "@nestjs/common";
 import { TicketAssignmentService } from "./ticket-assignment.service";
 import { JwtAuthGuard } from "../auth/jwt-auth.guard";
 import { RolesGuard } from "../auth/roles.guard";
@@ -25,6 +34,17 @@ export class TicketsController {
   @Patch(":id/resolve")
   resolve(@Param("id") ticketId: string, @Req() req: any) {
     return this.ticketService.resolveTicket(ticketId, req.user.userId);
+  }
+
+  @Post("close")
+  async close(
+    @Body() body: { conversationId: string },
+    @Req() req: any,
+  ) {
+    return this.ticketService.closeByCustomer(
+      body.conversationId,
+      req.user.userId,
+    );
   }
 
   @Get(":id/suggestions")

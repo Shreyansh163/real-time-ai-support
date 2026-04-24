@@ -9,6 +9,8 @@ import { ChatModule } from "./chat/chat.module";
 import { ConversationsModule } from "./conversations/conversations.module";
 import { TicketsModule } from "./tickets/tickets.module";
 import { AiModule } from "./ai/ai.module";
+import { AuditModule } from "./audit/audit.module";
+import { AdminModule } from "./admin/admin.module";
 
 @Module({
   imports: [
@@ -18,7 +20,9 @@ import { AiModule } from "./ai/ai.module";
     ChatModule,
     ConversationsModule,
     TicketsModule,
-    AiModule
+    AiModule,
+    AuditModule,
+    AdminModule,
   ],
   providers: [
     {

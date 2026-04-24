@@ -6,7 +6,8 @@
   "scripts": {
     "start:dev": "ts-node-dev --respawn --transpile-only src/main.ts",
     "build": "tsc",
-    "start": "node dist/main.js"
+    "start": "node dist/main.js",
+    "seed": "ts-node prisma/seed.ts"
   },
   "type": "commonjs",
   "keywords": [],
